@@ -1,8 +1,9 @@
 import logging
+from datetime import datetime
 
 
-LOG_FILENAME = 'app.log'
-LOG_FILEMODE = 'a'
+LOG_FILENAME = datetime.now().strftime('logs/%Y_%m_%d_%H:%M:%S.log')
+LOG_FILEMODE = 'w'
 LOG_FORMAT = '%(asctime)s:%(levelname)s - %(message)s'
 
 

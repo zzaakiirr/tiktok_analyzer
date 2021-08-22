@@ -5,3 +5,11 @@ START_INDEX = 5
 USERNAMES_COL_NAME = 'B'
 FOLLOWERS_COUNT_COL_NAME = 'C'
 AVG_PLAY_COUNT_COL_NAME = 'D'
+
+ERROR_FORMATTING = {
+    'backgroundColor': {
+        'red': 1,
+        'green': 0,
+        'blue': 0.3,
+    }
+}

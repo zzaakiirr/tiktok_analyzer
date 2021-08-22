@@ -21,21 +21,38 @@ class Worker:
                     posts_count,
                     current_row_index
                 )
+            else:
+                self.sheet_redactor.format_error(
+                    self.sheet_redactor.usernames_col,
+                    current_row_index,
+                )
             current_row_index += 1
 
     # MARK: - Private methods
 
     def __update_followers_count(self, user, current_row_index):
         followers_count = self.parser.get_followers_count(user)
-        self.sheet_redactor.update_followers_count(
-            current_row_index,
-            followers_count,
-        )
+        if followers_count:
+            self.sheet_redactor.update_followers_count(
+                current_row_index,
+                followers_count,
+            )
+        else:
+            self.sheet_redactor.format_error(
+                self.sheet_redactor.followers_count_col,
+                current_row_index,
+            )
 
     def __update_avg_play_count(self, user, posts_count, current_row_index):
         posts = self.parser.get_user_posts(user, posts_count)
         avg_play_count = worker_helpers.get_avg_posts_count(posts)
-        self.sheet_redactor.update_avg_play_count(
-            current_row_index,
-            avg_play_count,
-        )
+        if avg_play_count:
+            self.sheet_redactor.update_avg_play_count(
+                current_row_index,
+                avg_play_count,
+            )
+        else:
+            self.sheet_redactor.format_error(
+                self.sheet_redactor.avg_play_count_col,
+                current_row_index,
+            )

@@ -13,6 +13,8 @@ from google_sheets.sheet_config import (
     USERNAMES_COL_NAME,
     FOLLOWERS_COUNT_COL_NAME,
     AVG_PLAY_COUNT_COL_NAME,
+
+    ERROR_FORMATTING,
 )
 
 
@@ -61,6 +63,11 @@ class TikTokSheetRedactor:
             f'{self.avg_play_count_col}{row_number}',
             thousand_separated(avg_play_count),
         )
+
+    def format_error(self, col_letter, row_number, formatting=ERROR_FORMATTING):
+        self.__safe_sheet_method("format",
+                                 f"{col_letter}{row_number}",
+                                 formatting)
 
     # MARK: - Private methods
 
