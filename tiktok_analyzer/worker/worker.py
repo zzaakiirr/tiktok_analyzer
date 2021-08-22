@@ -14,8 +14,13 @@ class Worker:
 
         for username in self.sheet_redactor.get_usernames():
             user = self.parser.get_user(username)
-            self.__update_followers_count(user, current_row_index)
-            self.__update_avg_play_count(user, posts_count, current_row_index)
+            if user:
+                self.__update_followers_count(user, current_row_index)
+                self.__update_avg_play_count(
+                    user,
+                    posts_count,
+                    current_row_index
+                )
             current_row_index += 1
 
     # MARK: - Private methods

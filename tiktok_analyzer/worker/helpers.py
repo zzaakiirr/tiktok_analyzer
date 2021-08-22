@@ -22,4 +22,7 @@ def get_avg_posts_count(posts):
 
         total_play_count += int(play_count)
 
-    return int(total_play_count / valid_posts_count)
+    try:
+        return int(total_play_count / valid_posts_count)
+    except ZeroDivisionError:
+        return None

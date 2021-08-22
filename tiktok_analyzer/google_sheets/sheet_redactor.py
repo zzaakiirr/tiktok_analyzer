@@ -4,7 +4,7 @@ from pathlib import Path
 from gspread import service_account
 from gspread.exceptions import APIError
 
-from google_sheets.helpers import col_number
+from google_sheets.helpers import col_number, thousand_separated
 from google_sheets.sheet_config import (
     SERVICE_ACCOUNT_FILENAME,
     WORKBOOK_NAME,
@@ -51,7 +51,7 @@ class TikTokSheetRedactor:
         self.__safe_sheet_method(
             'update',
             f'{self.followers_count_col}{row_number}',
-            followers_count,
+            thousand_separated(followers_count),
         )
 
     def update_avg_play_count(self, row_number, avg_play_count):
@@ -59,7 +59,7 @@ class TikTokSheetRedactor:
         self.__safe_sheet_method(
             'update',
             f'{self.avg_play_count_col}{row_number}',
-            avg_play_count,
+            thousand_separated(avg_play_count),
         )
 
     # MARK: - Private methods
