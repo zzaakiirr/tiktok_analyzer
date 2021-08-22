@@ -10,6 +10,7 @@ class Worker:
         self.sheet_redactor = sheet_redactor
 
     def go(self, posts_count = USER_POSTS_COUNT):
+        self.sheet_redactor.set_initial_formatting()
         current_row_index = self.sheet_redactor.start_index
 
         for username in self.sheet_redactor.get_usernames():

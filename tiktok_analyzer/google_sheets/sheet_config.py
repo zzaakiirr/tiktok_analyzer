@@ -6,6 +6,14 @@ USERNAMES_COL_NAME = 'B'
 FOLLOWERS_COUNT_COL_NAME = 'C'
 AVG_PLAY_COUNT_COL_NAME = 'D'
 
+INITIAL_FORMATTING = {
+    'backgroundColor': {
+        'red': 1,
+        'green': 1,
+        'blue': 1,
+    }
+}
+
 ERROR_FORMATTING = {
     'backgroundColor': {
         'red': 1,

@@ -14,6 +14,7 @@ from google_sheets.sheet_config import (
     FOLLOWERS_COUNT_COL_NAME,
     AVG_PLAY_COUNT_COL_NAME,
 
+    INITIAL_FORMATTING,
     ERROR_FORMATTING,
 )
 
@@ -68,6 +69,12 @@ class TikTokSheetRedactor:
         self.__safe_sheet_method("format",
                                  f"{col_letter}{row_number}",
                                  formatting)
+
+    def set_initial_formatting(self, formatting=INITIAL_FORMATTING):
+        logging.info("Setting initial format for cells")
+        cell_range = f'{self.usernames_col}{self.start_index}:' \
+                     f'{self.avg_play_count_col}999999999'
+        self.__safe_sheet_method('format', cell_range, formatting)
 
     # MARK: - Private methods
 
