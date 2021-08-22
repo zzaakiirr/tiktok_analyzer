@@ -13,4 +13,5 @@ def configure_logging(log_filename=LOG_FILENAME,
         filename=log_filename,
         filemode=lof_filemode,
         format=log_format,
+        level=logging.DEBUG,
     )

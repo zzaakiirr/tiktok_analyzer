@@ -10,12 +10,12 @@ class TikTokParser:
         self.api = tiktok_api.get_instance()
 
     def get_user(self, username):
-        logging.info("TikTokApi: fetching user by username %s", username)
+        logging.info("TikTokApi: fetching user by username <%s>", username)
         user = self.__safe_api_call(
             'get_user',
             username,
             error_handler = lambda exception: logging.error(
-                'Cannot get user by username %s. Exception: %s',
+                'Cannot get user by username <%s>. Exception: %s',
                 username,
                 exception
             )
@@ -26,7 +26,7 @@ class TikTokParser:
         return safe_dict_access(
             user, ['userInfo', 'stats', 'followerCount'],
             lambda exception: logging.error(
-                'Cannot get followers count for user %s. Key error: %s',
+                'Cannot get followers count for user: %s. Key error: %s',
                 user,
                 exception,
             )
@@ -36,7 +36,7 @@ class TikTokParser:
         user_info = safe_dict_access(
             user, ['userInfo', 'user'],
             lambda exception: logging.error(
-                'Cannot get user_info for user %s. KeyError: %s',
+                'Cannot get user_info for user: %s. KeyError: %s',
                 user,
                 exception
             )
@@ -50,7 +50,7 @@ class TikTokParser:
         return self.__safe_api_call(
             'user_posts', user_id, sec_uid, count,
             error_handler = lambda exception: logging.error(
-                'Cannot get user posts for user info %s. Exception: %s',
+                'Cannot get user posts for user info: %s. Exception: %s',
                 user_info,
                 exception,
             )

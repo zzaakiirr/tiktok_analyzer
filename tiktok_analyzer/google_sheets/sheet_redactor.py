@@ -4,6 +4,7 @@ from pathlib import Path
 from gspread import service_account
 from gspread.exceptions import APIError
 
+from google_sheets.helpers import col_number
 from google_sheets.sheet_config import (
     SERVICE_ACCOUNT_FILENAME,
     WORKBOOK_NAME,
@@ -13,6 +14,7 @@ from google_sheets.sheet_config import (
     FOLLOWERS_COUNT_COL_NAME,
     AVG_PLAY_COUNT_COL_NAME,
 )
+
 
 class TikTokSheetRedactor:
 
@@ -37,23 +39,26 @@ class TikTokSheetRedactor:
 
     def get_usernames(self):
         logging.info("Parsing usernames from sheet")
-        col_values = self.__safe_sheet_method('col_values', self.usernames_col)
+        col_values = self.__safe_sheet_method(
+            'col_values',
+            col_number(self.usernames_col),
+        )
         usernames = col_values[self.start_index - 1:]
         return usernames
 
     def update_followers_count(self, row_number, followers_count):
-        logging.info("Updating followers count for row: %s", row_number)
+        logging.info("Updating followers count for row: <%s>", row_number)
         self.__safe_sheet_method(
             'update',
-            f'{self.followers_count_col}:{row_number}',
+            f'{self.followers_count_col}{row_number}',
             followers_count,
         )
 
     def update_avg_play_count(self, row_number, avg_play_count):
-        logging.info("Updating avg play count for row: %s", row_number)
+        logging.info("Updating avg play count for row: <%s>", row_number)
         self.__safe_sheet_method(
             'update',
-            f'{self.avg_play_count_col}:{row_number}',
+            f'{self.avg_play_count_col}{row_number}',
             avg_play_count,
         )
 
@@ -67,7 +72,7 @@ class TikTokSheetRedactor:
             sh = gc.open(workbook_name)
         except FileNotFoundError:
             logging.error(
-                "Cannot find service account file with name: %s",
+                "Cannot find service account file with name: <%s>",
                 service_account_filename,
             )
             return None
