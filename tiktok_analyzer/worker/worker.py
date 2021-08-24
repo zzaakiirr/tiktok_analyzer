@@ -1,4 +1,5 @@
 import worker.helpers as worker_helpers
+import time
 
 
 USER_POSTS_COUNT = 12
@@ -27,6 +28,8 @@ class Worker:
                     self.sheet_redactor.usernames_col,
                     current_row_index,
                 )
+            # Escape Google Sheets write requests per minute quota
+            time.sleep(1)
             current_row_index += 1
 
     # MARK: - Private methods
