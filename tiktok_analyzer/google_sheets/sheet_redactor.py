@@ -1,4 +1,5 @@
 import logging
+import time
 from pathlib import Path
 
 from gspread import service_account
@@ -98,6 +99,16 @@ class TikTokSheetRedactor:
             result = getattr(self.sheet, method_name)(*args, **kwargs)
         except APIError as exception:
             logging.error("Error with Google sheet API: %s", exception)
+
+            attempt = kwargs.get('attempt', 0)
+            if exception.args[0]['code'] == 429 and attempt <= 10:
+                logging.info("Retrying Google Sheet API request after 10 sec")
+                time.sleep(10)
+                return self.__safe_sheet_method(
+                    method_name,
+                    {'attempt': attempt + 1}
+                )
+
             return None
 
         return result
