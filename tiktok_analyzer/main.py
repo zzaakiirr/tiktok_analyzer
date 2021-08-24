@@ -6,7 +6,7 @@ from google_sheets.sheet_redactor import TikTokSheetRedactor
 from worker.worker import Worker
 
 
-def run_worker():
+if __name__ == '__main__':
     log.configure_logging()
 
     parser = TikTokParser()
@@ -14,7 +14,3 @@ def run_worker():
     worker = Worker(parser, sheet_redactor)
 
     worker.go()
-
-
-if __name__ == '__main__':
-    run_worker()
