@@ -17,7 +17,6 @@ rsa==4.7.2
 selenium==3.141.0
 selenium-stealth==1.0.6
 six==1.16.0
--e git+git@github.com:zzaakiirr/tiktok_analyzer.git@9c092675e3f7b816109a13e966baac688a55a7ce#egg=tiktok_analyzer
 TikTokApi==4.0.1
 urllib3==1.26.6
 websockets==9.1
